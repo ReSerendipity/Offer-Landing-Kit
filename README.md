@@ -7,7 +7,9 @@
 
 ## 在线体验
 
-**https://reserendipity.github.io/offer-landing-kit/**
+**https://reserendipity.github.io/Offer-Landing-Kit/**
+
+本地运行：纯静态单文件，无需构建或依赖，直接用浏览器打开 `index.html` 即可。
 
 支持直达链接：
 
