@@ -42,10 +42,14 @@ git push origin main
 最近一次是 `#14`，commit `de8f038c`，成功。也就是说：**推上去就已经换掉了线上内容**，
 回滚同理——`git push` 那一步才是"发布"动作，前面的 commit 只是准备。
 
-如果你只想提交而**不想**换线上内容，提交信息里带 `[skip ci]`。它对本仓是否也跳过那个注入的
-Pages 构建，判法很简单：拿那次提交跑一次 `GET /repos/<owner>/<repo>/actions/runs?head_sha=<sha>`，
-`total_count=0` 就是真没跑；再看 `GET /repos/<owner>/<repo>/pages/builds` 的最新一条是不是这个 commit。
-不要凭"[skip ci] 一般来说都有效"下结论。
+如果你只想提交而**不想**换线上内容：`[skip ci]` 在本仓**做不到这件事**。实测于本文件的落地提交
+`8597687a9a9cd533de133528de99a4c4b57229fa`：该 commit 的 workflow 运行数 `total_count=0`
+（对照它的上一笔 `de8f038c` 是 2 条：`CI[push]` + `pages build and deployment[dynamic]`），
+但 `GET /pages/builds/latest` 返回的仍是这个 commit，`created_at=2026-10-12T05:12:59Z`
+（推送后 1 秒），`status=built` ⇒ **legacy Pages 的注入构建不吃 commit message**，推上去线上就换。
+
+所以：本仓没有"只提交不发布"的口子。要留缓冲只能把改动放在分支上开 PR，合并到 `main` 才等于发布。
+判"这一笔到底发布没有"，别看 Actions，看 `GET /repos/<owner>/<repo>/pages/builds/latest` 的 `commit` 是不是它。
 
 ## 3. 回滚后必须做的四步验证
 
