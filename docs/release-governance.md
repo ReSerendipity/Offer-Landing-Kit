@@ -24,8 +24,8 @@
 ## 2. CHANGELOG 管理
 
 - 目标口径遵循 **Keep a Changelog**：`Added / Changed / Fixed / Deprecated / Removed / Security`；每次合并 `main` 在 `[Unreleased]` 追加；type 映射 `feat→Added`、`fix→Fixed`、`refactor→Changed`；发版时 `[Unreleased]` → `[VERSION] - YYYY-MM-DD`。
-- **本仓现状（如实记录）**：**无 `CHANGELOG.md`**。变更记录写在 README「Changelog」段，采用 `vX.Y (YYYY-MM-DD)` 简写，**未采用** `[Unreleased]` 增量结构。
-- 收敛方向：待定（负责人 + 触发条件：本仓转入多产物 / 频繁发版节奏、需要机器可聚合的变更记录时，再补 `CHANGELOG.md`）。**本次不创建** `CHANGELOG.md`。
+- **本仓现状（如实记录）**：根级 `CHANGELOG.md` **已建立**（Keep a Changelog 结构，见 §10.2 口径；本仓无 tag / Release，暂仅 `[Unreleased]` 并注明尚未建立版本化发布）。变更记录原写在 README「Changelog」段，采用 `vX.Y (YYYY-MM-DD)` 简写，**未采用** `[Unreleased]` 增量结构。
+- 收敛方向：**已完成**——根级 `CHANGELOG.md` 已按 Keep a Changelog 建立；后续每次合并 `main` 在 `[Unreleased]` 追加（`feat→Added`、`fix→Fixed`、`refactor→Changed`），发版时 `[Unreleased]` → `[VERSION] - YYYY-MM-DD`。
 
 ## 3. 发布流程（远端）
 
@@ -63,7 +63,7 @@
 
 > 本仓“发布”= 合并 / 推送到 `main` 触发 Pages 重建，故清单对应“合并前”检查。
 
-- [ ] README「Changelog」段与本次发布内容一致（本仓唯一版本位，见 §1；无独立 `CHANGELOG.md`，属待收敛）
+- [ ] 根级 `CHANGELOG.md` 的 `[Unreleased]` 段与本次发布内容一致（README「Changelog」段仍为本仓唯一文本版本位，见 §1）
 - [ ] `node tools/check-social-gap.mjs` 通过（CI 同一条口径核对命令，非 0 不得合并）
 - [ ] lint / format：**无**（本仓无 lint / format 工具链，此项不适用）
 - [ ] 改动 `index.html` 断档引擎时，已按 `docs/social-gap-check.md` 重跑用例表（C1/C2/C3/C6/C9）
