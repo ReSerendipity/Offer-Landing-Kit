@@ -5,3 +5,6 @@ TRAE求职作品秀_*.html
 
 # AI 工具链产物，不入库
 .qoder/
+AGENTS.md
+!/AGENTS.md
+/local/
